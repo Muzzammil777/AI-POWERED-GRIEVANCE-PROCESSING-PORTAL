@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+  <rect width="150" height="150" fill="#fff" rx="15" ry="15"/>
+  <circle cx="75" cy="55" r="35" fill="#801908" opacity="0.1"/>
+  <text x="75" y="100" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#801908">Grievance</text>
+  <text x="75" y="125" font-family="Arial" font-size="22" font-weight="bold" text-anchor="middle" fill="#801908">Portal</text>
+  <path d="M60,40 L75,55 L90,40 M60,70 L75,55 L90,70" fill="none" stroke="#801908" stroke-width="5" stroke-linecap="round"/>
+</svg>

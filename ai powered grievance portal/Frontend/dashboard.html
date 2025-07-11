@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Dashboard - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Dashboard with green theme */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .dashboard-container {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin: 20px 0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .grievance-list {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .grievance-list th,
+      .grievance-list td {
+        border: 1px solid #e0e0e0;
+        padding: 12px 15px;
+        text-align: left;
+      }
+
+      .grievance-list th {
+        background: linear-gradient(135deg, #27ae60 0%, #16a085 100%);
+        color: white;
+        font-weight: 600;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+      }
+
+      .grievance-list td {
+        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s ease;
+      }
+
+      .grievance-list tr:hover td {
+        background: rgba(39, 174, 96, 0.05);
+        transform: translateY(-1px);
+      }
+
+      .grievance-list tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      .status {
+        display: inline-block;
+        padding: 4px 8px;
+        border-radius: 3px;
+        color: #fff;
+      }
+
+      .status-pending {
+        background-color: #ff9800;
+      }
+
+      .status-resolved {
+        background-color: #4caf50;
+      }
+
+      .status-rejected {
+        background-color: #f44336;
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body class="body">
+    <div id="container">
+      <header class="header">
+        <div class="container">
+          <h2>AI POWERED GRIEVANCE PROCESSING PORTAL</h2>
+        </div>
+      </header>
+
+      <nav class="menu">
+        <div class="container">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html" class="selected">My Dashboard</a></li>
+            <li><a href="faq.html">Frequently Asked Questions</a></li>
+            <li><a href="announcements.html">Announcements</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="content">
+        <div class="container">
+          <h1>My Dashboard</h1>
+
+          <div class="dashboard-container">
+            <h3>My Grievances</h3>
+            <p>Here are your submitted grievances and their current status:</p>
+
+            <table class="grievance-list">
+              <thead>
+                <tr>
+                  <th>Grievance ID</th>
+                  <th>Subject</th>
+                  <th>Department</th>
+                  <th>Submitted Date</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>GR-2025-001</td>
+                  <td>Water supply issue in neighborhood</td>
+                  <td>Water Department</td>
+                  <td>01-Jul-2025</td>
+                  <td><span class="status status-pending">Pending</span></td>
+                  <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                  <td>GR-2025-002</td>
+                  <td>Street light not working</td>
+                  <td>Electricity Department</td>
+                  <td>25-Jun-2025</td>
+                  <td><span class="status status-resolved">Resolved</span></td>
+                  <td><a href="#">View Details</a></td>
+                </tr>
+                <tr>
+                  <td>GR-2025-003</td>
+                  <td>Road repair request</td>
+                  <td>15-Jun-2025</td>
+                  <td><span class="status status-rejected">Rejected</span></td>
+                  <td><a href="#">View Details</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="dashboard-container">
+            <h3>Submit New Grievance</h3>
+            <p>Need to report a new issue? Submit a new grievance.</p>
+            <button class="btn">Submit New Grievance</button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

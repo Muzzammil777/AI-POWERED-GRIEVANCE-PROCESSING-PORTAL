@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>File a Grievance - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* File Grievance with green theme */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .header h2 {
+        color: white;
+        margin: 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navigation styles */
+      .top-nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .content {
+        flex: 1;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .file-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .file-title {
+        color: #27ae60;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          135deg,
+          #27ae60 0%,
+          #16a085 50%,
+          #27ae60 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .file-form {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -10px;
+      }
+
+      .form-col {
+        flex: 1;
+        padding: 0 10px;
+        min-width: 250px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #27ae60;
+        font-size: 1rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-textarea {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        min-height: 120px;
+        resize: vertical;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+        font-family: inherit;
+      }
+
+      .form-textarea:focus {
+        outline: none;
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-select {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s ease;
+        box-sizing: border-box;
+        cursor: pointer;
+      }
+
+      .form-select:focus {
+        outline: none;
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-submit {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+      }
+
+      .form-submit:hover {
+        background: linear-gradient(135deg, #229954 0%, #1e8449 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #27ae60;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .back-link:hover {
+        color: #229954;
+        background: rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      @media (max-width: 768px) {
+        .file-container {
+          margin: 20px;
+          padding: 30px 20px;
+        }
+
+        .file-title {
+          font-size: 1.5rem;
+        }
+
+        .form-row {
+          flex-direction: column;
+        }
+
+        .form-col {
+          min-width: auto;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+          padding: 12px;
+        }
+
+        .form-submit {
+          padding: 12px 24px;
+        }
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      // Check if user is logged in
+      document.addEventListener("DOMContentLoaded", function () {
+        const userString = sessionStorage.getItem("user");
+        if (!userString) {
+          showNotification(
+            "Please log in to file a grievance",
+            "warning",
+            3000
+          );
+          setTimeout(() => {
+            window.location.href =
+              "login_new.html?redirect=file_grievance.html";
+          }, 1500);
+          return;
+        }
+
+        try {
+          const user = JSON.parse(userString);
+          if (user.role !== "user") {
+            showNotification(
+              "Please use a user account to file grievances",
+              "warning",
+              3000
+            );
+            setTimeout(() => {
+              window.location.href =
+                "login_new.html?redirect=file_grievance.html";
+            }, 1500);
+          }
+        } catch (error) {
+          // Invalid session data
+          sessionStorage.removeItem("user");
+          window.location.href = "login_new.html?redirect=file_grievance.html";
+        }
+      });
+
+      async function fileGrievance(event) {
+        event.preventDefault();
+
+        // Simple validation
+        const name = document.getElementById("full-name").value;
+        const phone = document.getElementById("phone").value;
+        const district = document.getElementById("district").value;
+        const address = document.getElementById("address").value;
+        const subject = document.getElementById("subject").value;
+        const description = document.getElementById("description").value;
+        const email = document.getElementById("email")?.value || "";
+        const attachment = document.getElementById("attachment")?.files[0];
+
+        if (
+          !name ||
+          !phone ||
+          !district ||
+          !address ||
+          !subject ||
+          !description
+        ) {
+          showNotification("Please fill in all required fields", "error");
+          return;
+        }
+
+        // Phone validation
+        if (phone.length !== 10 || isNaN(phone)) {
+          showNotification(
+            "Please enter a valid 10-digit phone number",
+            "error"
+          );
+          return;
+        }
+
+        // Show submission notification
+        showNotification(
+          "Processing your grievance submission...",
+          "info",
+          3000
+        );
+
+        // Create grievance data object
+        const grievanceData = {
+          name,
+          phone,
+          district,
+          address,
+          subject,
+          description,
+          email,
+          attachment,
+        };
+
+        try {
+          // First classify the petition
+          const classifyResult = await ApiClient.classifyPetition(
+            `${subject} ${description}`
+          );
+
+          if (classifyResult.error) {
+            showNotification(
+              "Could not classify petition. Using general category.",
+              "warning"
+            );
+            grievanceData.category = "General";
+          } else {
+            grievanceData.category = classifyResult.category;
+            showNotification(
+              `Your grievance has been classified to: ${classifyResult.category}`,
+              "success",
+              3000
+            );
+          }
+
+          // Now submit the petition with the assigned category
+          const result = await ApiClient.submitPetition(grievanceData);
+
+          if (result.error) {
+            showNotification(result.error, "error");
+            return;
+          }
+
+          // Check for similarity detection results
+          if (result.similarity_detected && result.similar_grievances) {
+            const similarCount = result.similar_grievances_count || 0;
+            if (similarCount > 0) {
+              showNotification(
+                `⚠️ Notice: Found ${similarCount} similar grievance(s). Your case may be related to existing complaints.`,
+                "warning",
+                6000
+              );
+
+              // Show details of similar grievances
+              const similarDetails = result.similar_grievances
+                .slice(0, 3) // Show max 3 similar cases
+                .map((g) => `• ${g.grievance_id}: ${g.subject}`)
+                .join("\n");
+
+              console.log("Similar grievances found:");
+              console.log(similarDetails);
+
+              // Optional: Show a more detailed popup
+              setTimeout(() => {
+                if (
+                  confirm(
+                    `Similar grievances detected:\n\n${similarDetails}\n\nWould you like to continue with your submission?`
+                  )
+                ) {
+                  // User confirmed to continue
+                  proceedToSuccess(result);
+                } else {
+                  // User wants to review
+                  showNotification(
+                    "Submission cancelled. You can review similar cases and resubmit if needed.",
+                    "info"
+                  );
+                  return;
+                }
+              }, 1000);
+              return;
+            }
+          }
+
+          // Proceed to success page
+          proceedToSuccess(result);
+        } catch (error) {
+          console.error("Grievance submission error:", error);
+          showNotification(
+            "An error occurred while submitting your grievance. Please try again.",
+            "error"
+          );
+        }
+      }
+
+      // Helper function to proceed to success page
+      function proceedToSuccess(result) {
+        // Use the tracking_id from the API response, fallback to generated ID if not available
+        const grievanceId = result.tracking_id || generateGrievanceId();
+
+        // Add similarity info to URL if detected
+        const urlParams = new URLSearchParams({
+          id: grievanceId,
+          department: result.department || "General",
+        });
+
+        if (result.similarity_detected) {
+          urlParams.set("similarity", "true");
+          urlParams.set("similar_count", result.similar_grievances_count || 0);
+        }
+
+        window.location.href = `file_success.html?${urlParams.toString()}`;
+      }
+    </script>
+  </head>
+  <body class="body">
+    <div id="container">
+      <header class="header">
+        <div class="container">
+          <h2>AI POWERED GRIEVANCE PROCESSING PORTAL</h2>
+          <nav class="top-nav">
+            <div class="nav-links">
+              <a href="index.html" class="nav-link">Home</a>
+              <a href="track_grievance.html" class="nav-link"
+                >Track Grievance</a
+              >
+              <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="container">
+          <div class="file-container">
+            <h2 class="file-title">File a New Grievance</h2>
+
+            <div class="file-instruction">
+              <p>
+                <strong>Instructions:</strong> Please fill in all the required
+                fields marked with an asterisk (*). Provide as much detail as
+                possible about your grievance to help us address it effectively.
+              </p>
+            </div>
+
+            <form class="file-form" onsubmit="fileGrievance(event)">
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="full-name" class="form-label">Full Name*</label>
+                    <input
+                      type="text"
+                      id="full-name"
+                      class="form-input"
+                      placeholder="Enter your full name"
+                      required
+                    />
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number*</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      class="form-input"
+                      placeholder="Enter your 10-digit phone number"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input
+                      type="email"
+                      id="email"
+                      class="form-input"
+                      placeholder="Enter your email address"
+                    />
+                  </div>
+                </div>
+                <div class="form-col">
+                  <div class="form-group">
+                    <label for="district" class="form-label">District*</label>
+                    <select id="district" class="form-select" required>
+                      <option value="">Select your district</option>
+                      <option value="Ariyalur">Ariyalur</option>
+                      <option value="Chengalpattu">Chengalpattu</option>
+                      <option value="Chennai">Chennai</option>
+                      <option value="Coimbatore">Coimbatore</option>
+                      <option value="Cuddalore">Cuddalore</option>
+                      <option value="Dharmapuri">Dharmapuri</option>
+                      <option value="Dindigul">Dindigul</option>
+                      <option value="Erode">Erode</option>
+                      <option value="Kallakurichi">Kallakurichi</option>
+                      <option value="Kanchipuram">Kanchipuram</option>
+                      <option value="Kanniyakumari">Kanniyakumari</option>
+                      <option value="Karur">Karur</option>
+                      <option value="Krishnagiri">Krishnagiri</option>
+                      <option value="Madurai">Madurai</option>
+                      <option value="Mayiladuthurai">Mayiladuthurai</option>
+                      <option value="Nagapattinam">Nagapattinam</option>
+                      <option value="Namakkal">Namakkal</option>
+                      <option value="Nilgiris">Nilgiris</option>
+                      <option value="Perambalur">Perambalur</option>
+                      <option value="Pudukkottai">Pudukkottai</option>
+                      <option value="Ramanathapuram">Ramanathapuram</option>
+                      <option value="Ranipet">Ranipet</option>
+                      <option value="Salem">Salem</option>
+                      <option value="Sivagangai">Sivagangai</option>
+                      <option value="Tenkasi">Tenkasi</option>
+                      <option value="Thanjavur">Thanjavur</option>
+                      <option value="Theni">Theni</option>
+                      <option value="Thoothukudi">Thoothukudi</option>
+                      <option value="Tiruchirappalli">Tiruchirappalli</option>
+                      <option value="Tirunelveli">Tirunelveli</option>
+                      <option value="Tirupathur">Tirupathur</option>
+                      <option value="Tiruppur">Tiruppur</option>
+                      <option value="Tiruvallur">Tiruvallur</option>
+                      <option value="Tiruvannamalai">Tiruvannamalai</option>
+                      <option value="Tiruvarur">Tiruvarur</option>
+                      <option value="Vellore">Vellore</option>
+                      <option value="Viluppuram">Viluppuram</option>
+                      <option value="Virudhunagar">Virudhunagar</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="address" class="form-label">Address*</label>
+                <textarea
+                  id="address"
+                  class="form-textarea"
+                  placeholder="Enter your complete address"
+                  required
+                  rows="3"
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="subject" class="form-label">Subject*</label>
+                <input
+                  type="text"
+                  id="subject"
+                  class="form-input"
+                  placeholder="Brief subject of your grievance"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="description" class="form-label"
+                  >Detailed Description*</label
+                >
+                <textarea
+                  id="description"
+                  class="form-textarea"
+                  placeholder="Please provide detailed information about your grievance"
+                  required
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="attachment" class="form-label"
+                  >Attachment (if any)</label
+                >
+                <input type="file" id="attachment" class="form-input" />
+                <small>Supported formats: JPG, PNG, PDF (Max size: 2MB)</small>
+              </div>
+
+              <button type="submit" class="form-submit">
+                Submit Grievance
+              </button>
+            </form>
+
+            <a href="login.html" class="back-link">← Back to Login</a>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>
+            &copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

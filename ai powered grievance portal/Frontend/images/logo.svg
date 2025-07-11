@@ -1,0 +1,6 @@
+<!-- This is a placeholder for a logo image. In a real implementation, this would be a binary file. -->
+<!-- For this example, we're creating a simple SVG instead -->
+<svg xmlns="http://www.w3.org/2000/svg" width="142" height="60" viewBox="0 0 142 60">
+  <rect width="142" height="60" fill="#f0f0f0"/>
+  <text x="10" y="35" font-family="Arial" font-size="14" fill="#801908">Grievance Portal</text>
+</svg>

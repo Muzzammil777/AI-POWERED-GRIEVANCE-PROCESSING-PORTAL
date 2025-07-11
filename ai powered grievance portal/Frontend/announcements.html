@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Announcements - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Announcements with green theme */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      .announcements-container {
+        background: white;
+        border-radius: 20px;
+        padding: 30px;
+        margin: 20px 0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .announcement {
+        margin-bottom: 30px;
+        border-bottom: 2px solid rgba(39, 174, 96, 0.1);
+        padding-bottom: 20px;
+        transition: all 0.3s ease;
+      }
+
+      .announcement:hover {
+        background: rgba(39, 174, 96, 0.02);
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0 20px 0;
+      }
+
+      .announcement:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+      }
+
+      .announcement-title {
+        font-size: 1.3em;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #27ae60;
+        background: linear-gradient(
+          135deg,
+          #27ae60 0%,
+          #16a085 50%,
+          #27ae60 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .announcement-meta {
+        color: #666;
+        font-size: 0.9em;
+        margin-bottom: 15px;
+      }
+
+      .announcement-content {
+        line-height: 1.6;
+      }
+
+      .announcement-important {
+        background-color: #fff8e1;
+        border-left: 4px solid #ffc107;
+      }
+
+      .badge-important {
+        display: inline-block;
+        background-color: #f44336;
+        color: white;
+        padding: 2px 8px;
+        border-radius: 3px;
+        font-size: 0.8em;
+        margin-left: 10px;
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body class="body">
+    <div id="container">
+      <header class="header">
+        <div class="container">
+          <h2>AI POWERED GRIEVANCE PROCESSING PORTAL</h2>
+        </div>
+      </header>
+
+      <nav class="menu">
+        <div class="container">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">My Dashboard</a></li>
+            <li><a href="faq.html">Frequently Asked Questions</a></li>
+            <li>
+              <a href="announcements.html" class="selected">Announcements</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <main class="content">
+        <div class="container">
+          <h1>Announcements</h1>
+
+          <div class="announcements-container">
+            <div class="announcement announcement-important">
+              <div class="announcement-title">
+                System Maintenance Schedule
+                <span class="badge-important">Important</span>
+              </div>
+              <div class="announcement-meta">
+                Posted on: July 7, 2025 | By: Admin
+              </div>
+              <div class="announcement-content">
+                <p>
+                  Dear users, please be informed that the Grievance Portal will
+                  be undergoing scheduled maintenance on
+                  <strong>July 15, 2025, from 10:00 PM to 2:00 AM (IST)</strong
+                  >. During this time, the portal will be unavailable.
+                </p>
+                <p>
+                  We recommend submitting any urgent grievances before or after
+                  the maintenance window. We apologize for any inconvenience
+                  this may cause.
+                </p>
+              </div>
+            </div>
+
+            <div class="announcement">
+              <div class="announcement-title">
+                New Department Added: Environmental Concerns
+              </div>
+              <div class="announcement-meta">
+                Posted on: July 3, 2025 | By: Admin
+              </div>
+              <div class="announcement-content">
+                <p>
+                  We are pleased to announce the addition of a new department to
+                  handle environmental concerns in our grievance system.
+                  Citizens can now submit grievances related to pollution, waste
+                  management, illegal dumping, and other environmental issues.
+                </p>
+                <p>
+                  This expansion is part of our ongoing commitment to addressing
+                  a wider range of citizen concerns efficiently.
+                </p>
+              </div>
+            </div>
+
+            <div class="announcement">
+              <div class="announcement-title">Mobile App Now Available</div>
+              <div class="announcement-meta">
+                Posted on: June 28, 2025 | By: Admin
+              </div>
+              <div class="announcement-content">
+                <p>
+                  We're excited to announce the launch of our new mobile
+                  application for the Grievance Portal. The app is now available
+                  for download on both Android and iOS platforms.
+                </p>
+                <p>Features include:</p>
+                <ul>
+                  <li>Submit grievances on-the-go</li>
+                  <li>Attach photos directly from your mobile device</li>
+                  <li>Real-time notifications on grievance status</li>
+                  <li>Location-based grievance submission</li>
+                </ul>
+                <p>
+                  Download today to experience a more convenient way to submit
+                  and track your grievances!
+                </p>
+              </div>
+            </div>
+
+            <div class="announcement">
+              <div class="announcement-title">
+                Performance Improvement Update
+              </div>
+              <div class="announcement-meta">
+                Posted on: June 15, 2025 | By: Admin
+              </div>
+              <div class="announcement-content">
+                <p>
+                  We have successfully completed the migration to our new server
+                  infrastructure. As a result, you should experience faster
+                  loading times and improved responsiveness throughout the
+                  portal.
+                </p>
+                <p>
+                  If you encounter any issues with the portal performance,
+                  please report them through the feedback form available in your
+                  dashboard.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>&copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

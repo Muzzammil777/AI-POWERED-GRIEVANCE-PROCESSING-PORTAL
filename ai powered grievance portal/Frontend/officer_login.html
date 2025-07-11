@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Officer Login - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Officer login with green theme */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .header h2 {
+        color: white;
+        margin: 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .content {
+        flex: 1;
+        padding: 40px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .officer-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 40px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .officer-title {
+        color: #27ae60;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          135deg,
+          #27ae60 0%,
+          #16a085 50%,
+          #27ae60 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .officer-form {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #27ae60;
+        font-size: 1rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-submit {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+      }
+
+      .form-submit:hover {
+        background: linear-gradient(135deg, #229954 0%, #1e8449 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #27ae60;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .back-link:hover {
+        color: #229954;
+        background: rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .forgot-password {
+        text-align: right;
+        display: block;
+        margin-top: 15px;
+        font-size: 0.9em;
+        color: #16a085;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .forgot-password:hover {
+        color: #138d75;
+        text-decoration: underline;
+      }
+
+      .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      @media (max-width: 768px) {
+        .officer-container {
+          margin: 20px;
+          padding: 30px 20px;
+        }
+
+        .officer-title {
+          font-size: 1.5rem;
+        }
+
+        .form-input {
+          padding: 12px;
+        }
+
+        .form-submit {
+          padding: 12px 24px;
+        }
+      }
+
+      .secure-login-notice {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 0.9em;
+        color: #666;
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      // Show notification function if not available from main.js
+      function showNotification(message, type = "info", duration = 3000) {
+        // Check if notification container exists, if not create it
+        let notificationContainer = document.getElementById(
+          "notification-container"
+        );
+
+        if (!notificationContainer) {
+          notificationContainer = document.createElement("div");
+          notificationContainer.id = "notification-container";
+          notificationContainer.style.position = "fixed";
+          notificationContainer.style.top = "20px";
+          notificationContainer.style.right = "20px";
+          notificationContainer.style.zIndex = "1000";
+          document.body.appendChild(notificationContainer);
+        }
+
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = message;
+
+        // Style the notification
+        notification.style.padding = "15px 20px";
+        notification.style.marginBottom = "10px";
+        notification.style.borderRadius = "5px";
+        notification.style.boxShadow = "0 4px 8px rgba(0, 0, 0, 0.1)";
+        notification.style.fontSize = "14px";
+        notification.style.opacity = "0";
+        notification.style.transition = "opacity 0.3s ease-in-out";
+
+        if (type === "success") {
+          notification.style.backgroundColor = "#4caf50";
+          notification.style.color = "white";
+        } else if (type === "error") {
+          notification.style.backgroundColor = "#f44336";
+          notification.style.color = "white";
+        } else if (type === "warning") {
+          notification.style.backgroundColor = "#ff9800";
+          notification.style.color = "white";
+        } else {
+          notification.style.backgroundColor = "#2196f3";
+          notification.style.color = "white";
+        }
+
+        // Add notification to container
+        notificationContainer.appendChild(notification);
+
+        // Show notification
+        setTimeout(() => {
+          notification.style.opacity = "1";
+        }, 10);
+
+        // Hide notification after duration
+        setTimeout(() => {
+          notification.style.opacity = "0";
+          setTimeout(() => {
+            notification.remove();
+          }, 300);
+        }, duration);
+      }
+
+      // Check if user is already logged in
+      document.addEventListener("DOMContentLoaded", function () {
+        const userString = sessionStorage.getItem("user");
+        if (userString) {
+          try {
+            const user = JSON.parse(userString);
+            if (user.role === "admin") {
+              showNotification("You are already logged in", "info");
+              setTimeout(() => {
+                window.location.href = "officer_dashboard.html";
+              }, 1500);
+            }
+          } catch (error) {
+            // Invalid session data, clear it
+            sessionStorage.removeItem("user");
+          }
+        }
+      });
+
+      async function officerLogin(event) {
+        event.preventDefault();
+
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value.trim();
+
+        // Simple validation
+        if (!username || !password) {
+          showNotification("Please enter both username and password", "error");
+          return;
+        }
+
+        try {
+          showNotification("Authenticating...", "info");
+
+          // Use the ApiClient instead of direct fetch
+          const data = await ApiClient.login(username, password);
+
+          if (data.role === "admin") {
+            // Store admin information with all required fields
+            sessionStorage.setItem(
+              "user",
+              JSON.stringify({
+                username: username,
+                full_name: username.toUpperCase() + " Officer",
+                role: data.role,
+                user_type: "officer",
+                department: data.department,
+                justLoggedIn: true,
+              })
+            );
+
+            showNotification(data.message || "Login successful", "success");
+
+            // Redirect to officer dashboard
+            setTimeout(() => {
+              window.location.href = "officer_dashboard.html";
+            }, 1500);
+          } else {
+            showNotification(
+              data.error ||
+                "Invalid officer credentials. Only admin accounts can access the officer dashboard.",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Login error:", error);
+          showNotification("Network error. Please try again.", "error");
+        }
+      }
+    </script>
+  </head>
+  <body class="body">
+    <div id="container">
+      <header class="header">
+        <div class="container">
+          <h2>AI POWERED GRIEVANCE PROCESSING PORTAL</h2>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="container">
+          <div class="officer-container">
+            <h2 class="officer-title">Officer Login</h2>
+            <p>
+              Please enter your credentials to access the officer dashboard.
+            </p>
+
+            <form class="officer-form" onsubmit="officerLogin(event)">
+              <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input
+                  type="text"
+                  id="username"
+                  class="form-input"
+                  placeholder="Enter your username"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  id="password"
+                  class="form-input"
+                  placeholder="Enter your password"
+                  required
+                />
+                <a href="#" class="forgot-password">Forgot password?</a>
+              </div>
+
+              <button type="submit" class="form-submit">Login</button>
+            </form>
+
+            <div class="secure-login-notice">
+              <p>This is a secure login area for authorized officials only.</p>
+            </div>
+
+            <a href="login.html" class="back-link">← Back to Login</a>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>
+            &copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,242 @@
+.body {
+  background-color: #eaebeb;
+}
+.home .AppContainer__homeWidget {
+  padding-top: 25px;
+}
+.ticketDetail .ConversationForm__conversationTarea span[data-id="newReply"] {
+  display: none;
+}
+.vop-cls {
+  display: flex;
+  justify-content: center;
+}
+.vop-cls .newiconimg {
+  margin-right: 10px;
+  position: relative;
+  top: 5px;
+}
+.logo {
+  width: 142px;
+}
+.kbLanding .iipgcms,
+.kbLanding .callcenter {
+  display: none;
+}
+.articleDetail .zd_hc_accordion_content_inner {
+  overflow-x: scroll;
+}
+@media only screen and (min-width: 990px) {
+  .TitleContainer__container {
+    margin-left: 0px !important;
+    margin-right: 2.75%;
+    width: 30.5%;
+  }
+}
+.articleDetail .Layout__fullWidth {
+  max-width: 100rem;
+}
+.newinfo-msg {
+  margin-top: 50px !important;
+}
+.newinfo-msg1 {
+  margin-top: 20px !important;
+}
+.newinfo-msg,
+.newinfo-msg1 {
+  position: relative;
+}
+.newinfo-msg .newiconimg,
+.newinfo-msg1 .newiconimg {
+  position: absolute;
+  left: -50px;
+}
+
+/* Header styles with local banner image */
+.header {
+  background-image: url("../images/banner.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Login Page Specific Styles */
+.login-container {
+  background-color: #fffbeb !important;
+}
+
+.circle-left {
+  border-color: #6950a1;
+  transform: scale(1);
+  border-width: 4px;
+  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(105, 80, 161, 0.1)
+  );
+}
+
+.circle-middle {
+  border-color: #3dc1bd;
+  transform: scale(1);
+  border-width: 4px;
+  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(61, 193, 189, 0.1)
+  );
+}
+
+.circle-right {
+  border-color: #e54d4d;
+  transform: scale(1);
+  border-width: 4px;
+  transition: all 0.3s ease;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(229, 77, 77, 0.1)
+  );
+}
+
+/* Infinity design for the three circles */
+.login-circle {
+  position: relative;
+  width: 100%;
+  max-width: 800px; /* Increased width to fit the infinity design */
+  height: 350px;
+  margin-top: 50px;
+}
+
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border-width: 4px;
+  border-style: solid;
+  width: 250px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.circle:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.circle-left {
+  top: 50px;
+  left: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(105, 80, 161, 0.1)
+  );
+}
+
+.circle-middle {
+  top: 0;
+  left: 275px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(61, 193, 189, 0.1)
+  );
+}
+
+.circle-right {
+  top: 50px;
+  right: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(229, 77, 77, 0.1)
+  );
+}
+
+.circle-dot {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  z-index: 10;
+}
+
+.dot-left {
+  background-color: #6950a1;
+  top: 50px;
+  left: 0;
+}
+
+.dot-middle {
+  background-color: #3dc1bd;
+  top: 0;
+  left: 275px;
+}
+
+.dot-right {
+  background-color: #e54d4d;
+  top: 50px;
+  right: 0;
+}
+
+/* Button placements inside circles */
+.icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 15px;
+}
+
+.btn-login {
+  padding: 12px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  min-width: 180px;
+  transition: all 0.3s ease;
+}
+
+.btn-track {
+  background-color: #2974d8;
+  transition: all 0.3s ease;
+}
+
+.btn-track:hover {
+  background-color: #1c5cad;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn-file {
+  background-color: #0a4a58;
+  transition: all 0.3s ease;
+}
+
+.btn-file:hover {
+  background-color: #073641;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.btn-officer {
+  background-color: #801908;
+  transition: all 0.3s ease;
+}
+
+.btn-officer:hover {
+  background-color: #671407;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}

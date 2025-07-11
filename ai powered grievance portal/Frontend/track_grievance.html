@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Track Grievance - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Track Grievance with green theme */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      #container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        padding: 20px 0;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: relative;
+      }
+
+      .header h2 {
+        color: white;
+        margin: 0;
+        text-align: center;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      /* Navigation styles */
+      .top-nav {
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 20px;
+      }
+
+      .nav-link {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        padding: 5px 10px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+      }
+
+      .nav-link:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
+
+      .content {
+        flex: 1;
+        padding: 40px 20px;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .track-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px;
+        background: white;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(0, 0, 0, 0.1);
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .track-title {
+        color: #27ae60;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          135deg,
+          #27ae60 0%,
+          #16a085 50%,
+          #27ae60 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .track-form {
+        margin-top: 30px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #27ae60;
+        font-size: 1rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 15px;
+        border: 2px solid #e0e0e0;
+        border-radius: 10px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        box-sizing: border-box;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #27ae60;
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .form-submit {
+        background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: 600;
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+      }
+
+      .form-submit:hover {
+        background: linear-gradient(135deg, #229954 0%, #1e8449 100%);
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 30px;
+        color: #27ae60;
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .back-link:hover {
+        color: #229954;
+        background: rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      .footer {
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        padding: 20px 0;
+        text-align: center;
+        margin-top: auto;
+      }
+
+      .footer p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .status-result {
+        padding: 20px;
+        margin-top: 30px;
+        border-radius: 10px;
+        display: none;
+      }
+
+      .status-result.visible {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .status-pending {
+        background-color: #fff3cd;
+        border-left: 5px solid #ffc107;
+        color: #856404;
+      }
+
+      .status-in-progress {
+        background-color: #cce5ff;
+        border-left: 5px solid #007bff;
+        color: #004085;
+      }
+
+      .status-resolved {
+        background-color: #d4edda;
+        border-left: 5px solid #28a745;
+        color: #155724;
+      }
+
+      .status-rejected {
+        background-color: #f8d7da;
+        border-left: 5px solid #dc3545;
+        color: #721c24;
+      }
+
+      .status-unknown {
+        background-color: #e2e3e5;
+        border-left: 5px solid #6c757d;
+        color: #383d41;
+      }
+
+      .status-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      .status-title {
+        font-weight: bold;
+        font-size: 1.2rem;
+        margin: 0;
+      }
+
+      .status-badge {
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .badge-pending {
+        background-color: #ffc107;
+        color: #212529;
+      }
+
+      .badge-in_progress {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .badge-resolved {
+        background-color: #28a745;
+        color: #fff;
+      }
+
+      .badge-rejected {
+        background-color: #dc3545;
+        color: #fff;
+      }
+
+      .status-info {
+        margin: 0 0 10px 0;
+      }
+
+      .status-details {
+        margin-top: 20px;
+      }
+
+      .detail-row {
+        display: flex;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+      }
+
+      .detail-label {
+        flex: 1;
+        font-weight: 500;
+        color: #666;
+      }
+
+      .detail-value {
+        flex: 2;
+        font-weight: 500;
+      }
+
+      .timeline {
+        margin-top: 30px;
+        padding-left: 20px;
+        border-left: 3px solid #e0e0e0;
+      }
+
+      .timeline-item {
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .timeline-item::before {
+        content: "";
+        position: absolute;
+        left: -29px;
+        top: 0;
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: white;
+        border: 3px solid #27ae60;
+      }
+
+      .timeline-date {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 5px;
+      }
+
+      .timeline-content {
+        background: #f8f9fa;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .timeline-title {
+        font-weight: 600;
+        margin: 0 0 5px 0;
+        color: #27ae60;
+      }
+
+      .timeline-description {
+        margin: 0;
+        color: #666;
+      }
+
+      @media (max-width: 768px) {
+        .track-container {
+          margin: 20px;
+          padding: 30px 20px;
+        }
+
+        .track-title {
+          font-size: 1.5rem;
+        }
+
+        .form-input {
+          padding: 12px;
+        }
+
+        .form-submit {
+          padding: 12px 24px;
+        }
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+    <script>
+      // Helper function to format date as DD-MMM-YYYY
+      function formatDate(date) {
+        const months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = months[date.getMonth()];
+        const year = date.getFullYear();
+        return `${day}-${month}-${year}`;
+      }
+
+      /**
+       * Shows a notification message
+       * @param {string} message - Message to display
+       * @param {string} type - Type of notification (success, error, warning, info)
+       * @param {number} duration - How long to show the notification (milliseconds)
+       */
+      function showNotification(message, type = "info", duration = 3000) {
+        // Create notification container if it doesn't exist
+        let notificationContainer = document.getElementById(
+          "notification-container"
+        );
+        if (!notificationContainer) {
+          notificationContainer = document.createElement("div");
+          notificationContainer.id = "notification-container";
+          notificationContainer.style.position = "fixed";
+          notificationContainer.style.top = "20px";
+          notificationContainer.style.right = "20px";
+          notificationContainer.style.zIndex = "9999";
+          document.body.appendChild(notificationContainer);
+        }
+
+        // Create notification element
+        const notification = document.createElement("div");
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+          <div class="notification-content">
+            ${message}
+          </div>
+          <button class="notification-close">&times;</button>
+        `;
+
+        // Style notification
+        notification.style.backgroundColor =
+          type === "success"
+            ? "#d4edda"
+            : type === "error"
+            ? "#f8d7da"
+            : type === "warning"
+            ? "#fff3cd"
+            : "#d1ecf1";
+        notification.style.color =
+          type === "success"
+            ? "#155724"
+            : type === "error"
+            ? "#721c24"
+            : type === "warning"
+            ? "#856404"
+            : "#0c5460";
+        notification.style.border = `1px solid ${
+          type === "success"
+            ? "#c3e6cb"
+            : type === "error"
+            ? "#f5c6cb"
+            : type === "warning"
+            ? "#ffeeba"
+            : "#bee5eb"
+        }`;
+        notification.style.padding = "12px";
+        notification.style.borderRadius = "4px";
+        notification.style.marginBottom = "10px";
+        notification.style.boxShadow = "0 2px 5px rgba(0,0,0,0.1)";
+        notification.style.display = "flex";
+        notification.style.justifyContent = "space-between";
+        notification.style.alignItems = "center";
+        notification.style.minWidth = "250px";
+        notification.style.maxWidth = "350px";
+        notification.style.animation = "fadeIn 0.3s ease-out forwards";
+
+        // Style close button
+        const closeButton = notification.querySelector(".notification-close");
+        closeButton.style.background = "transparent";
+        closeButton.style.border = "none";
+        closeButton.style.padding = "0 5px";
+        closeButton.style.fontSize = "20px";
+        closeButton.style.fontWeight = "bold";
+        closeButton.style.cursor = "pointer";
+        closeButton.style.opacity = "0.5";
+        closeButton.style.transition = "opacity 0.2s";
+
+        // Close button hover effect
+        closeButton.addEventListener("mouseenter", () => {
+          closeButton.style.opacity = "1";
+        });
+        closeButton.addEventListener("mouseleave", () => {
+          closeButton.style.opacity = "0.5";
+        });
+
+        // Add notification to container
+        notificationContainer.appendChild(notification);
+
+        // Close notification on button click
+        closeButton.addEventListener("click", () => {
+          notification.style.animation = "fadeOut 0.3s ease-out forwards";
+          setTimeout(() => {
+            if (notification.parentNode === notificationContainer) {
+              notificationContainer.removeChild(notification);
+            }
+          }, 300);
+        });
+
+        // Auto-close after duration
+        if (duration) {
+          setTimeout(() => {
+            if (notification.parentNode === notificationContainer) {
+              notification.style.animation = "fadeOut 0.3s ease-out forwards";
+              setTimeout(() => {
+                if (notification.parentNode === notificationContainer) {
+                  notificationContainer.removeChild(notification);
+                }
+              }, 300);
+            }
+          }, duration);
+        }
+
+        // Add animation styles if not already added
+        if (!document.getElementById("notification-styles")) {
+          const styleEl = document.createElement("style");
+          styleEl.id = "notification-styles";
+          styleEl.textContent = `
+            @keyframes fadeIn {
+              from { opacity: 0; transform: translateY(-10px); }
+              to { opacity: 1; transform: translateY(0); }
+            }
+            @keyframes fadeOut {
+              from { opacity: 1; transform: translateY(0); }
+              to { opacity: 0; transform: translateY(-10px); }
+            }
+          `;
+          document.head.appendChild(styleEl);
+        }
+
+        return notification;
+      }
+
+      async function trackGrievance(event) {
+        event.preventDefault();
+
+        // Hide previous results if any
+        document.querySelectorAll(".status-result").forEach((elem) => {
+          elem.classList.remove("visible");
+        });
+
+        // Get form values
+        const grievanceId = document
+          .getElementById("grievance-id")
+          .value.trim();
+        const phone = document.getElementById("phone").value.trim();
+
+        // Simple validation
+        if (!grievanceId || !phone) {
+          showNotification("Please fill in all required fields", "error");
+          return;
+        }
+
+        // Phone validation
+        if (phone.length !== 10 || isNaN(phone)) {
+          showNotification(
+            "Please enter a valid 10-digit phone number",
+            "error"
+          );
+          return;
+        }
+
+        // Format check for grievance ID (strict validation)
+        const idPattern = /^GR-\d{4}-[A-Z0-9]{6}$/i;
+        if (!grievanceId.match(idPattern)) {
+          showNotification(
+            "Please enter a valid grievance ID in format GR-YYYY-XXXXXX",
+            "error"
+          );
+          return;
+        }
+
+        // Show tracking notification
+        showNotification("Tracking your grievance...", "info", 3000);
+
+        try {
+          // Call the backend API to track the grievance
+          const result = await ApiClient.trackGrievance(grievanceId, phone);
+
+          // If the backend is not available, fall back to demo mode
+          if (result.error && result.error.includes("Network error")) {
+            showNotification(
+              "Could not connect to the server. Showing demo data instead.",
+              "warning",
+              5000
+            );
+
+            // For demo purposes, simulate a response with random status
+            const statuses = ["pending", "in_progress", "resolved", "rejected"];
+            const randomStatus =
+              statuses[Math.floor(Math.random() * statuses.length)];
+            const today = new Date();
+            const pastDate = new Date(today);
+            pastDate.setDate(today.getDate() - 3);
+
+            // Format dates
+            const formatDateStr = (date) => {
+              return date
+                .toLocaleDateString("en-GB", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })
+                .replace(/ /g, "-");
+            };
+
+            // Create a mock result for demonstration purposes
+            const demoResult = {
+              found: true,
+              grievance: {
+                id: grievanceId.match(idPattern)
+                  ? grievanceId
+                  : `GR-2025-${Math.random()
+                      .toString(36)
+                      .substr(2, 6)
+                      .toUpperCase()}`,
+                name: "Demo User",
+                phone: phone,
+                district: "Chennai",
+                address: "123 Demo Street, Chennai",
+                subject: "Water supply issue in neighborhood",
+                description:
+                  "There has been no water supply in our area for the past 3 days.",
+                department: "Public Works Department",
+                status: randomStatus,
+                created_at: formatDateStr(pastDate),
+                updates: [
+                  {
+                    date: formatDateStr(pastDate),
+                    title: "Grievance Received",
+                    description:
+                      "Your grievance has been received and is being processed.",
+                  },
+                  {
+                    date: formatDateStr(
+                      new Date(pastDate.getTime() + 24 * 60 * 60 * 1000)
+                    ),
+                    title: "Under Review",
+                    description:
+                      "Your grievance is currently under review by the department.",
+                  },
+                ],
+              },
+            };
+
+            // Add resolution update if status is not pending
+            if (randomStatus !== "pending") {
+              demoResult.grievance.updates.push({
+                date: formatDateStr(today),
+                title:
+                  randomStatus.charAt(0).toUpperCase() + randomStatus.slice(1),
+                description:
+                  randomStatus === "resolved"
+                    ? "Your issue has been resolved. The water supply has been restored."
+                    : "Your grievance could not be processed due to insufficient information.",
+              });
+            }
+
+            // Use the demo result instead
+            return displayGrievanceStatus(demoResult.grievance);
+          }
+
+          // Handle API response
+          if (!result.found) {
+            showNotification(
+              result.message ||
+                "No grievance found with the provided ID and phone number",
+              "error"
+            );
+            return;
+          }
+
+          // Format the data if needed
+          const grievance = result.grievance;
+
+          // Ensure proper ID format for display
+          if (!grievance.id) {
+            grievance.id = grievanceId;
+          }
+
+          // Make sure we have updates
+          if (
+            !grievance.updates ||
+            !Array.isArray(grievance.updates) ||
+            grievance.updates.length === 0
+          ) {
+            grievance.updates = [
+              {
+                date: grievance.created_at || formatDate(new Date()),
+                title: "Grievance Received",
+                description:
+                  "Your grievance has been received and is being processed.",
+              },
+            ];
+
+            if (grievance.status && grievance.status !== "pending") {
+              grievance.updates.push({
+                date: formatDate(new Date()),
+                title:
+                  grievance.status.charAt(0).toUpperCase() +
+                  grievance.status.slice(1),
+                description: `Your grievance has been marked as ${grievance.status}.`,
+              });
+            }
+          }
+
+          // Show success notification
+          showNotification(
+            "Grievance found! Displaying details...",
+            "success",
+            3000
+          );
+
+          // Display the result
+          displayGrievanceStatus(grievance);
+        } catch (error) {
+          console.error("Tracking error:", error);
+          showNotification(
+            "An error occurred while tracking your grievance. Please try again.",
+            "error"
+          );
+        }
+      }
+
+      function displayGrievanceStatus(grievance) {
+        const resultContainer = document.getElementById("status-result");
+
+        // Set the status class
+        resultContainer.className = "status-result visible";
+
+        // Default to pending if no status is provided
+        const status = (grievance.status || "pending").toLowerCase();
+
+        if (status === "pending") {
+          resultContainer.classList.add("status-pending");
+        } else if (status === "in_progress") {
+          resultContainer.classList.add("status-in-progress");
+        } else if (status === "resolved") {
+          resultContainer.classList.add("status-resolved");
+        } else if (status === "rejected") {
+          resultContainer.classList.add("status-rejected");
+        } else {
+          resultContainer.classList.add("status-unknown");
+        }
+
+        // Set the status badge
+        const statusBadge = document.getElementById("status-badge");
+        statusBadge.className = "status-badge";
+        statusBadge.classList.add(`badge-${status}`);
+        statusBadge.textContent =
+          status.charAt(0).toUpperCase() + status.slice(1);
+
+        // Set grievance details with fallbacks
+        document.getElementById("detail-id").textContent =
+          grievance.id || "N/A";
+        document.getElementById("detail-subject").textContent =
+          grievance.petition_subject || grievance.subject || "N/A";
+        document.getElementById("detail-department").textContent =
+          grievance.department || "General";
+        document.getElementById("detail-date").textContent =
+          grievance.created_at || formatDate(new Date());
+
+        // Build the timeline - Try to get from new backend API first
+        buildTimelineFromBackend(grievance);
+
+        // Show the result container
+        resultContainer.style.display = "block";
+      }
+
+      async function buildTimelineFromBackend(grievance) {
+        const timelineContainer = document.getElementById("timeline");
+        timelineContainer.innerHTML = "";
+
+        try {
+          // Try to get timeline from new backend API
+          if (grievance.id && grievance.department) {
+            const timelineResult = await ApiClient.getGrievanceTimeline(
+              grievance.id,
+              grievance.department
+            );
+
+            if (timelineResult.success && timelineResult.timeline) {
+              displayTimelineFromAPI(timelineResult.timeline);
+              return;
+            }
+          }
+        } catch (error) {
+          console.log("New timeline API not available, using fallback");
+        }
+
+        // Fallback to original timeline logic
+        buildTimelineFallback(grievance);
+      }
+
+      function displayTimelineFromAPI(timeline) {
+        const timelineContainer = document.getElementById("timeline");
+
+        if (timeline.length === 0) {
+          buildTimelineFallback({
+            status: "pending",
+            created_at: formatDate(new Date()),
+          });
+          return;
+        }
+
+        timeline.forEach((entry) => {
+          const timelineItem = document.createElement("div");
+          timelineItem.className = "timeline-item";
+
+          const displayDate =
+            entry.date || formatDate(new Date(entry.timestamp));
+          const displayTime = entry.time || "";
+          const statusTitle = entry.status
+            ? entry.status.charAt(0).toUpperCase() + entry.status.slice(1)
+            : "Update";
+          const comment = entry.comment || "";
+
+          timelineItem.innerHTML = `
+            <div class="timeline-date">${displayDate} ${displayTime}</div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">${statusTitle}</h4>
+              <p class="timeline-description">${comment}</p>
+            </div>
+          `;
+
+          timelineContainer.appendChild(timelineItem);
+        });
+      }
+
+      function buildTimelineFallback(grievance) {
+        const fallbackTimelineContainer = document.getElementById("timeline");
+        fallbackTimelineContainer.innerHTML = "";
+
+        // Make sure we have updates to display
+        const updates = grievance.updates || [];
+
+        if (updates.length === 0) {
+          // Create a default timeline if none exists
+          const defaultUpdate = {
+            date: grievance.created_at || formatDate(new Date()),
+            title: "Grievance Received",
+            description:
+              "Your grievance has been received and is being processed.",
+          };
+          updates.push(defaultUpdate);
+
+          // Add status update if available and not pending
+          if (
+            grievance.status &&
+            grievance.status.toLowerCase() !== "pending"
+          ) {
+            updates.push({
+              date: formatDate(new Date()),
+              title:
+                grievance.status.charAt(0).toUpperCase() +
+                grievance.status.slice(1),
+              description: `Your grievance has been marked as ${grievance.status}.`,
+            });
+          }
+        }
+
+        // Display timeline items
+        updates.forEach((update) => {
+          if (!update.date || !update.title) return; // Skip incomplete updates
+
+          const timelineItem = document.createElement("div");
+          timelineItem.className = "timeline-item";
+
+          timelineItem.innerHTML = `
+            <div class="timeline-date">${update.date}</div>
+            <div class="timeline-content">
+              <h4 class="timeline-title">${update.title}</h4>
+              <p class="timeline-description">${update.description || ""}</p>
+            </div>
+          `;
+
+          fallbackTimelineContainer.appendChild(timelineItem);
+        });
+      }
+
+      /**
+       * Checks if user is logged in before redirecting to a protected page
+       * @param {string} targetUrl - URL to redirect to if authenticated
+       */
+      function checkAuthAndRedirect(targetUrl) {
+        const userSession = localStorage.getItem("user_session");
+
+        if (userSession) {
+          // User is logged in, redirect to target URL
+          window.location.href = targetUrl;
+        } else {
+          // User not logged in, redirect to login page with return URL
+          window.location.href = `login_new.html?return=${encodeURIComponent(
+            targetUrl
+          )}`;
+
+          // Show notification
+          showNotification("Please log in to file a grievance", "info", 3000);
+        }
+      }
+    </script>
+  </head>
+  <body class="body">
+    <div id="container">
+      <header class="header">
+        <div class="container">
+          <h2>AI POWERED GRIEVANCE PROCESSING PORTAL</h2>
+          <nav class="top-nav">
+            <div class="nav-links">
+              <a href="index.html" class="nav-link">Home</a>
+              <a
+                href="#"
+                onclick="checkAuthAndRedirect('file_grievance.html')"
+                class="nav-link"
+                >File a Grievance</a
+              >
+              <a href="faq.html" class="nav-link">FAQ</a>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="content">
+        <div class="container">
+          <div class="track-container">
+            <h2 class="track-title">Track Your Grievance</h2>
+
+            <div class="track-instruction">
+              <p>
+                Please enter your grievance ID and registered phone number to
+                check the status of your submission.
+              </p>
+            </div>
+
+            <form class="track-form" onsubmit="trackGrievance(event)">
+              <div class="form-group">
+                <label for="grievance-id" class="form-label"
+                  >Grievance ID*</label
+                >
+                <input
+                  type="text"
+                  id="grievance-id"
+                  class="form-input"
+                  placeholder="Enter your grievance ID (e.g., GR-2025-A1B2C3)"
+                  required
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="phone" class="form-label"
+                  >Registered Phone Number*</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  class="form-input"
+                  placeholder="Enter your 10-digit phone number"
+                  required
+                />
+              </div>
+
+              <button type="submit" class="form-submit">Track Grievance</button>
+            </form>
+
+            <!-- Status result section - initially hidden -->
+            <div id="status-result" class="status-result">
+              <div class="status-header">
+                <h3 class="status-title">Grievance Status</h3>
+                <span id="status-badge" class="status-badge">Pending</span>
+              </div>
+
+              <p class="status-info">
+                Here is the current status of your grievance:
+              </p>
+
+              <div class="status-details">
+                <div class="detail-row">
+                  <div class="detail-label">Grievance ID:</div>
+                  <div id="detail-id" class="detail-value">GR-2025-123</div>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-label">Subject:</div>
+                  <div id="detail-subject" class="detail-value">
+                    Water supply issue in neighborhood
+                  </div>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-label">Department:</div>
+                  <div id="detail-department" class="detail-value">
+                    Public Works Department
+                  </div>
+                </div>
+                <div class="detail-row">
+                  <div class="detail-label">Submitted On:</div>
+                  <div id="detail-date" class="detail-value">05-Jul-2025</div>
+                </div>
+              </div>
+
+              <h4>Progress Timeline</h4>
+              <div id="timeline" class="timeline">
+                <!-- Timeline items will be added here by JavaScript -->
+              </div>
+            </div>
+
+            <a href="index.html" class="back-link">← Back to Home</a>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <div class="container">
+          <p>
+            &copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

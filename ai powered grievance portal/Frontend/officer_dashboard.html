@@ -1,0 +1,1399 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Officer Dashboard - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link id="customStyleSheet" href="css/stylesheet.css" rel="stylesheet" />
+
+    <!-- External dependencies -->
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/reminders.js"></script>
+
+    <style>
+      /* Officer Dashboard specific styles with Green Theme */
+      body {
+        background: linear-gradient(
+          135deg,
+          #2e7d32 0%,
+          #4caf50 50%,
+          #66bb6a 100%
+        );
+        min-height: 100vh;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, sans-serif;
+      }
+
+      .dashboard-header {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.2);
+        border: 1px solid rgba(46, 125, 50, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .dashboard-header:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(46, 125, 50, 0.25);
+      }
+
+      .officer-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .officer-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-right: 15px;
+        border: 3px solid #4caf50;
+        transition: all 0.3s ease;
+      }
+
+      .officer-avatar:hover {
+        transform: scale(1.1);
+        border-color: #2e7d32;
+      }
+
+      .officer-name {
+        font-weight: bold;
+        color: #2e7d32;
+        font-size: 1.1em;
+      }
+
+      .officer-role {
+        color: #4caf50;
+        font-size: 0.9em;
+        font-weight: 500;
+      }
+
+      .officer-department {
+        color: #2e7d32;
+        font-size: 0.8em;
+        font-style: italic;
+        margin-top: 5px;
+        background: rgba(76, 175, 80, 0.1);
+        padding: 3px 8px;
+        border-radius: 10px;
+        display: inline-block;
+      }
+
+      .logout-btn {
+        background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(255, 68, 68, 0.3);
+      }
+
+      .logout-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+        background: linear-gradient(135deg, #cc0000 0%, #990000 100%);
+      }
+
+      .dashboard-stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+
+      .stat-card {
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 12px;
+        padding: 25px;
+        flex: 1;
+        min-width: 200px;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);
+        border: 1px solid rgba(46, 125, 50, 0.1);
+        transition: all 0.3s ease;
+        text-align: center;
+      }
+
+      .stat-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(46, 125, 50, 0.2);
+        border-color: #4caf50;
+      }
+
+      .stat-number {
+        font-size: 2.5em;
+        font-weight: bold;
+        margin-bottom: 10px;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-label {
+        color: #666;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+      }
+
+      .pending {
+        color: #ff9800;
+      }
+
+      .resolved {
+        color: #4caf50;
+      }
+
+      .rejected {
+        color: #f44336;
+      }
+
+      .high-priority {
+        color: #d32f2f;
+      }
+
+      .total {
+        color: #2e7d32;
+      }
+
+      .priority-badge {
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-weight: 500;
+        font-size: 0.85em;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .priority-High {
+        background-color: #ffcdd2;
+        color: #c62828;
+        border: 1px solid #ef5350;
+      }
+
+      .priority-Medium {
+        background-color: #fff9c4;
+        color: #f57f17;
+        border: 1px solid #ffca28;
+      }
+
+      .priority-Low {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #66bb6a;
+      }
+
+      h3 {
+        color: #2e7d32;
+        font-size: 1.5em;
+        margin-bottom: 20px;
+        font-weight: 600;
+      }
+
+      /* Tab System */
+      .dashboard-tabs {
+        display: flex;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e0e0;
+      }
+
+      .tab-btn {
+        background: transparent;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1rem;
+        font-weight: 500;
+        color: #555;
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+
+      .tab-btn:hover {
+        color: #2e7d32;
+      }
+
+      .tab-btn.active {
+        color: #2e7d32;
+        font-weight: 600;
+      }
+
+      .tab-btn.active::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #2e7d32;
+        border-radius: 3px 3px 0 0;
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.4s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Reminder specific styles */
+      .reminder-stats {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+
+      .action-bar {
+        margin-bottom: 20px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 15px;
+      }
+
+      .primary-btn {
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+      }
+
+      .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(76, 175, 80, 0.4);
+        background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%);
+      }
+
+      .search-container {
+        margin-bottom: 25px;
+      }
+
+      .search-container input {
+        width: 100%;
+        max-width: 400px;
+        padding: 12px 16px;
+        border: 2px solid rgba(46, 125, 50, 0.2);
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background: white;
+      }
+
+      .search-container input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+      }
+
+      .filter-container {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      .filter-select {
+        padding: 8px 12px;
+        border: 2px solid rgba(46, 125, 50, 0.2);
+        border-radius: 6px;
+        background: white;
+        font-size: 14px;
+        transition: all 0.3s ease;
+      }
+
+      .filter-select:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+      }
+
+      .search-btn {
+        background: linear-gradient(135deg, #4caf50 0%, #2e7d32 100%);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        margin-left: 10px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .search-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 3px 10px rgba(76, 175, 80, 0.3);
+      }
+
+      .grievance-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);
+        border: 1px solid rgba(46, 125, 50, 0.1);
+      }
+
+      .grievance-table th,
+      .grievance-table td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid rgba(46, 125, 50, 0.1);
+      }
+
+      .grievance-table th {
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        color: white;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        font-size: 0.9em;
+      }
+
+      .grievance-table tr:hover {
+        background-color: rgba(76, 175, 80, 0.05);
+        transform: scale(1.01);
+        transition: all 0.2s ease;
+      }
+
+      .status-badge {
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-weight: 500;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .status-pending {
+        background-color: #fff3e0;
+        color: #e65100;
+        border: 1px solid #ffb74d;
+      }
+
+      .status-resolved {
+        background-color: #e8f5e9;
+        color: #2e7d32;
+        border: 1px solid #66bb6a;
+      }
+
+      .status-rejected {
+        background-color: #ffebee;
+        color: #c62828;
+        border: 1px solid #e57373;
+      }
+
+      .status-in_progress {
+        background-color: #e3f2fd;
+        color: #1976d2;
+        border: 1px solid #64b5f6;
+      }
+
+      .action-btn {
+        padding: 8px 12px;
+        margin: 2px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 0.85em;
+        transition: all 0.3s ease;
+      }
+
+      .view-btn {
+        background: linear-gradient(135deg, #2196f3 0%, #1976d2 100%);
+        color: white;
+        box-shadow: 0 2px 6px rgba(33, 150, 243, 0.3);
+      }
+
+      .view-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+      }
+
+      .update-btn {
+        background: linear-gradient(135deg, #ff9800 0%, #f57c00 100%);
+        color: white;
+        box-shadow: 0 2px 6px rgba(255, 152, 0, 0.3);
+      }
+
+      .update-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+      }
+
+      /* Similarity badge styles */
+      .similarity-badge {
+        background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
+        color: white;
+        padding: 4px 8px;
+        border-radius: 12px;
+        font-size: 0.75em;
+        font-weight: 600;
+        margin-left: 8px;
+        display: inline-block;
+        box-shadow: 0 2px 4px rgba(156, 39, 176, 0.3);
+        cursor: help;
+      }
+
+      .similar-btn {
+        background: linear-gradient(135deg, #9c27b0 0%, #673ab7 100%);
+        color: white;
+        box-shadow: 0 2px 6px rgba(156, 39, 176, 0.3);
+      }
+
+      .similar-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(156, 39, 176, 0.4);
+      }
+
+      .footer {
+        text-align: center;
+        padding: 20px;
+        margin-top: 40px;
+        color: white;
+        background: rgba(46, 125, 50, 0.1);
+        border-radius: 12px;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 10% auto;
+        padding: 0;
+        border-radius: 12px;
+        width: 80%;
+        max-width: 500px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-header {
+        padding: 20px;
+        background: linear-gradient(135deg, #2e7d32 0%, #4caf50 100%);
+        color: white;
+        border-radius: 12px 12px 0 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-header h3 {
+        margin: 0;
+        color: white;
+      }
+
+      .close {
+        color: white;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .close:hover {
+        transform: scale(1.1);
+      }
+
+      .modal-body {
+        padding: 20px;
+      }
+
+      .grievance-info {
+        background: #f5f5f5;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+
+      .grievance-info div {
+        margin-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+      }
+
+      #update-form select,
+      #update-form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      #update-form textarea {
+        resize: vertical;
+      }
+
+      .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .cancel-btn {
+        padding: 8px 16px;
+        background-color: #f1f1f1;
+        color: #333;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .submit-btn {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+
+      .submit-btn:hover {
+        background-color: #2e7d32;
+      }
+    </style>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const user = JSON.parse(sessionStorage.getItem("user"));
+
+        if (!user || user.user_type !== "officer") {
+          window.location.href = "officer_login.html";
+          return;
+        }
+
+        // Set officer information
+        document.querySelector(".officer-name").textContent =
+          user.full_name || "OFFICER NAME";
+        document.getElementById("department-name").textContent =
+          user.department || "Department Name";
+
+        // Load initial data
+        if (user.department) {
+          loadOfficerPetitions(user.department);
+        }
+
+        // Set up search functionality
+        const searchInput = document.querySelector(".search-input");
+        if (searchInput) {
+          searchInput.addEventListener("input", function () {
+            // Add search functionality here if needed
+          });
+        }
+
+        // Set up filter functionality
+        const statusFilter = document.getElementById("status-filter");
+        const priorityFilter = document.getElementById("priority-filter");
+        const districtFilter = document.getElementById("district-filter");
+
+        if (statusFilter) {
+          statusFilter.addEventListener("change", function () {
+            // Add filter functionality here if needed
+          });
+        }
+
+        // Show success message if user just logged in
+        if (user.justLoggedIn) {
+          showNotification(`Welcome back, ${user.full_name}!`, "success");
+          // Remove the flag to prevent showing on every reload
+          delete user.justLoggedIn;
+          sessionStorage.setItem("user", JSON.stringify(user));
+        }
+
+        // Notification cleanup
+        setTimeout(() => {
+          const notifications = document.querySelectorAll(".notification");
+          notifications.forEach((notification) => {
+            notification.style.opacity = "0";
+            setTimeout(() => {
+              notification.remove();
+            }, 1500);
+          });
+        }, 1500);
+      });
+
+      function logout() {
+        sessionStorage.removeItem("user");
+        showNotification("Logged out successfully", "success");
+        setTimeout(() => {
+          window.location.href = "officer_login.html";
+        }, 1000);
+      }
+
+      function viewGrievance(id) {
+        alert(`Viewing grievance ${id}`);
+        // In a real app, this would navigate to a detailed view
+      }
+
+      async function updateGrievance(id, subject, currentStatus) {
+        // Get the department
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        if (!user || !user.department) {
+          showNotification("Could not determine your department", "error");
+          return;
+        }
+
+        const department = user.department;
+
+        // Set up the modal with current values
+        document.getElementById("grievance-id").textContent = id;
+        document.getElementById("grievance-subject").textContent = subject;
+        document.getElementById("update-status").value =
+          currentStatus || "pending";
+        document.getElementById("update-comment").value = "";
+
+        // Store the ID and department for the submit handler
+        document.getElementById("update-form").dataset.id = id;
+        document.getElementById("update-form").dataset.department = department;
+
+        // Show the modal
+        document.getElementById("update-modal").style.display = "block";
+      }
+
+      // Close the modal
+      function closeUpdateModal() {
+        document.getElementById("update-modal").style.display = "none";
+      }
+
+      // Handle the status update form submission
+      async function submitStatusUpdate(event) {
+        event.preventDefault();
+
+        const id = event.target.dataset.id;
+        const department = event.target.dataset.department;
+        const status = document.getElementById("update-status").value;
+        const comment = document.getElementById("update-comment").value;
+
+        // Validate
+        if (!id || !department || !status) {
+          showNotification("Missing required information", "error");
+          return;
+        }
+
+        showNotification("Updating grievance status...", "info");
+
+        try {
+          const result = await ApiClient.updateGrievanceStatus(
+            id,
+            status,
+            department,
+            comment
+          );
+
+          if (result.success) {
+            showNotification("Status updated successfully", "success");
+            closeUpdateModal();
+
+            // Reload the petitions to show the updated status
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if (user && user.department) {
+              await loadOfficerPetitions(user.department);
+            }
+          } else {
+            showNotification(
+              result.message || "Failed to update status",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Error updating status:", error);
+          showNotification("An error occurred during update", "error");
+        }
+      }
+
+      // Tab switching functionality
+      function showTab(tabName) {
+        // Hide all tab contents
+        const tabContents = document.querySelectorAll(".tab-content");
+        tabContents.forEach((content) => {
+          content.classList.remove("active");
+        });
+
+        // Remove active class from all tab buttons
+        const tabButtons = document.querySelectorAll(".tab-btn");
+        tabButtons.forEach((button) => {
+          button.classList.remove("active");
+        });
+
+        // Show selected tab content
+        const selectedTab = document.getElementById(tabName + "-tab");
+        if (selectedTab) {
+          selectedTab.classList.add("active");
+        }
+
+        // Add active class to the correct button
+        const targetButton = Array.from(tabButtons).find((button) =>
+          button.textContent.includes(
+            tabName === "grievances"
+              ? "Manage Grievances"
+              : "Automated Reminders"
+          )
+        );
+        if (targetButton) {
+          targetButton.classList.add("active");
+        }
+
+        // Load data based on tab
+        if (tabName === "reminders") {
+          const user = JSON.parse(sessionStorage.getItem("user"));
+          if (user && user.department) {
+            loadReminders(user.department);
+          }
+        }
+      }
+
+      // Load reminders for the automated reminders tab
+      async function loadReminders(department) {
+        try {
+          showNotification("Loading reminders...", "info");
+
+          // Update reminder stats
+          await updateReminderStats();
+
+          // Load reminder data
+          const reminders = await ReminderSystem.loadReminders(department);
+
+          if (reminders && Array.isArray(reminders.data)) {
+            const tableBody = document.getElementById("reminders-table-body");
+            if (tableBody) {
+              tableBody.innerHTML = ""; // Clear existing rows
+
+              if (reminders.data.length === 0) {
+                tableBody.innerHTML = `
+                  <tr>
+                    <td colspan="6" style="text-align: center; padding: 20px;">
+                      No pending reminders found
+                    </td>
+                  </tr>
+                `;
+              } else {
+                reminders.data.forEach((reminder) => {
+                  const row = document.createElement("tr");
+
+                  const daysPending = Math.floor(
+                    (new Date() - new Date(reminder.created_at)) /
+                      (1000 * 60 * 60 * 24)
+                  );
+                  const lastReminded = reminder.last_reminder
+                    ? ReminderSystem.formatReminderDate(reminder.last_reminder)
+                    : "Never";
+
+                  row.innerHTML = `
+                    <td>${reminder.tracking_id || "N/A"}</td>
+                    <td>${reminder.subject || "N/A"}</td>
+                    <td>${reminder.department || "N/A"}</td>
+                    <td>${daysPending} days</td>
+                    <td>${lastReminded}</td>
+                    <td>
+                      <button onclick="sendIndividualReminder('${
+                        reminder._id
+                      }')" class="action-btn view-btn">
+                        Send Reminder
+                      </button>
+                    </td>
+                  `;
+
+                  tableBody.appendChild(row);
+                });
+              }
+            }
+            showNotification("Reminders loaded successfully", "success");
+          } else {
+            showNotification("Error loading reminders", "error");
+          }
+        } catch (error) {
+          console.error("Error loading reminders:", error);
+          showNotification("Error loading reminders", "error");
+        }
+      }
+
+      // Update reminder statistics
+      async function updateReminderStats() {
+        try {
+          const stats = await ReminderSystem.getStats();
+
+          if (stats && stats.success) {
+            document.querySelector(".total-reminders").textContent =
+              stats.data.total || 0;
+            document.querySelector(".recent-reminders").textContent =
+              stats.data.recent || 0;
+          }
+        } catch (error) {
+          console.error("Error updating reminder stats:", error);
+        }
+      }
+
+      // Trigger manual reminders
+      async function triggerManualReminders() {
+        try {
+          showNotification("Sending reminders...", "info");
+
+          const result = await ReminderSystem.triggerManualCheck();
+
+          if (result && result.success) {
+            showNotification(
+              `Reminders sent successfully! ${
+                result.count || 0
+              } reminders sent.`,
+              "success"
+            );
+
+            // Reload reminders to update the table
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if (user && user.department) {
+              await loadReminders(user.department);
+            }
+          } else {
+            showNotification(
+              result.message || "Failed to send reminders",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Error sending reminders:", error);
+          showNotification("Error sending reminders", "error");
+        }
+      }
+
+      // Send individual reminder
+      async function sendIndividualReminder(reminderId) {
+        try {
+          showNotification("Sending reminder...", "info");
+
+          const response = await fetch(
+            `${API_BASE_URL}/admin/send_individual_reminder`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ reminderId: reminderId }),
+            }
+          );
+
+          const result = await response.json();
+
+          if (result && result.success) {
+            showNotification("Reminder sent successfully!", "success");
+
+            // Reload reminders to update the table
+            const user = JSON.parse(sessionStorage.getItem("user"));
+            if (user && user.department) {
+              await loadReminders(user.department);
+            }
+          } else {
+            showNotification(
+              result.message || "Failed to send reminder",
+              "error"
+            );
+          }
+        } catch (error) {
+          console.error("Error sending individual reminder:", error);
+          showNotification("Error sending reminder", "error");
+        }
+      }
+
+      // Function to load officer petitions from the backend
+      async function loadOfficerPetitions(department) {
+        try {
+          showNotification("Loading petitions...", "info");
+
+          // Use ApiClient to get petitions
+          const petitions = await ApiClient.getAdminPetitions(department);
+
+          if (Array.isArray(petitions)) {
+            // Update stats based on actual data
+            updatePetitionStats(petitions);
+
+            // Render petitions to the table
+            const tableBody = document.getElementById("petitions-table-body");
+            if (tableBody) {
+              tableBody.innerHTML = ""; // Clear existing rows
+
+              if (petitions.length === 0) {
+                // Show message if no petitions
+                tableBody.innerHTML = `
+                  <tr>
+                    <td colspan="8" style="text-align: center; padding: 20px;">
+                      No petitions found for this department
+                    </td>
+                  </tr>
+                `;
+              } else {
+                petitions.forEach((petition) => {
+                  const row = document.createElement("tr");
+
+                  // Use the tracking_id from the petition, fallback to auto-generated if missing
+                  const petitionId =
+                    petition.tracking_id ||
+                    `GR-${new Date().getFullYear()}-${Math.random()
+                      .toString(36)
+                      .substr(2, 6)
+                      .toUpperCase()}`;
+
+                  // Get the status or default to pending
+                  const status = petition.status?.toLowerCase() || "pending";
+                  const statusDisplay = petition.status
+                    ? petition.status.charAt(0).toUpperCase() +
+                      petition.status.slice(1)
+                    : "Pending";
+
+                  // Get the priority or default to Medium
+                  const priority = petition.priority || "Medium";
+
+                  // Check for similarity information
+                  const hasSimilar =
+                    petition.similarity_detected ||
+                    (petition.related_to && petition.related_to.length > 0);
+                  const similarCount = petition.related_to
+                    ? petition.related_to.length
+                    : 0;
+                  const similarityBadge = hasSimilar
+                    ? `<span class="similarity-badge" title="Similar cases found">🔗 ${similarCount}</span>`
+                    : "";
+
+                  row.innerHTML = `
+                    <td>${petitionId}</td>
+                    <td>
+                      ${petition.petition_subject || "N/A"}
+                      ${similarityBadge}
+                    </td>
+                    <td>${petition.name || "N/A"}</td>
+                    <td>${petition.address || "N/A"}</td>
+                    <td>${formatDate(new Date())}</td>
+                    <td>
+                      <span class="priority-badge priority-${priority}">${priority}</span>
+                    </td>
+                    <td>
+                      <span class="status-badge status-${status}">${statusDisplay}</span>
+                    </td>
+                    <td>
+                      <button onclick="viewGrievance('${
+                        petition._id
+                      }')" class="action-btn view-btn">View</button>
+                      <button onclick="updateGrievance('${petitionId}', '${(
+                    petition.petition_subject || ""
+                  ).replace(
+                    /'/g,
+                    "\\'"
+                  )}', '${status}')" class="action-btn update-btn">Update</button>
+                      ${
+                        hasSimilar
+                          ? `<button onclick="viewSimilarCases('${petitionId}')" class="action-btn similar-btn" title="View similar cases">Similar</button>`
+                          : ""
+                      }
+                    </td>
+                  `;
+
+                  tableBody.appendChild(row);
+                });
+              }
+            }
+
+            showNotification("Petitions loaded successfully", "success");
+          } else {
+            showNotification("Error loading petitions", "error");
+          }
+        } catch (error) {
+          console.error("Error loading petitions:", error);
+          showNotification("Error loading petitions", "error");
+        }
+      }
+
+      // Function to update petition statistics based on data
+      function updatePetitionStats(petitions) {
+        const stats = {
+          total: petitions.length,
+          pending: 0,
+          resolved: 0,
+          rejected: 0,
+          highPriority: 0,
+        };
+
+        petitions.forEach((petition) => {
+          const status = petition.status?.toLowerCase();
+          const priority = petition.priority?.toLowerCase();
+
+          if (status === "pending") stats.pending++;
+          else if (status === "resolved") stats.resolved++;
+          else if (status === "rejected") stats.rejected++;
+
+          if (priority === "high") stats.highPriority++;
+        });
+
+        // Update the UI with calculated stats
+        const totalElement = document.querySelector(".total .stat-number");
+        const pendingElement = document.querySelector(".pending .stat-number");
+        const resolvedElement = document.querySelector(
+          ".resolved .stat-number"
+        );
+        const rejectedElement = document.querySelector(
+          ".rejected .stat-number"
+        );
+        const highPriorityElement = document.querySelector(
+          ".high-priority .stat-number"
+        );
+
+        if (totalElement) totalElement.textContent = stats.total;
+        if (pendingElement) pendingElement.textContent = stats.pending;
+        if (resolvedElement) resolvedElement.textContent = stats.resolved;
+        if (rejectedElement) rejectedElement.textContent = stats.rejected;
+        if (highPriorityElement)
+          highPriorityElement.textContent = stats.highPriority;
+      }
+
+      // Close modal when clicking outside of it
+      window.onclick = function (event) {
+        const modal = document.getElementById("update-modal");
+        if (event.target == modal) {
+          closeUpdateModal();
+        }
+      };
+
+      // Function to view similar cases
+      async function viewSimilarCases(trackingId) {
+        try {
+          const user = JSON.parse(sessionStorage.getItem("user"));
+          if (!user || !user.department) {
+            showNotification("Session expired. Please login again.", "error");
+            return;
+          }
+
+          showNotification("Loading similar cases...", "info");
+
+          // Get the current petition details first
+          const petitions = await ApiClient.getAdminPetitions(user.department);
+          const currentPetition = petitions.find(
+            (p) => p.tracking_id === trackingId
+          );
+
+          if (!currentPetition) {
+            showNotification("Petition not found", "error");
+            return;
+          }
+
+          // Check for similar grievances
+          const similarResult = await ApiClient.checkSimilarGrievances(
+            user.department,
+            `${currentPetition.petition_subject} ${currentPetition.petition_description}`,
+            0.6 // Lower threshold for officer review
+          );
+
+          if (
+            similarResult.success &&
+            similarResult.similar_grievances.length > 0
+          ) {
+            const similarCases = similarResult.similar_grievances;
+            let similarInfo = `Similar Cases for ${trackingId}:\n\n`;
+
+            similarCases.forEach((similar, index) => {
+              similarInfo += `${index + 1}. ${similar.grievance_id} (${(
+                similar.similarity_score * 100
+              ).toFixed(1)}% match)\n`;
+              similarInfo += `   Subject: ${similar.subject}\n`;
+              similarInfo += `   Preview: ${similar.description}\n\n`;
+            });
+
+            alert(similarInfo);
+          } else {
+            showNotification(
+              "No similar cases found for detailed review",
+              "info"
+            );
+          }
+        } catch (error) {
+          console.error("Error viewing similar cases:", error);
+          showNotification("Error loading similar cases", "error");
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="container">
+      <header class="dashboard-header">
+        <div class="officer-info">
+          <img
+            src="images/officer-avatar.svg"
+            alt="Officer Avatar"
+            class="officer-avatar"
+          />
+          <div>
+            <div class="officer-name">OFFICER NAME</div>
+            <div class="officer-role">Grievance Officer</div>
+            <div class="officer-department" id="department-name">
+              Department Name
+            </div>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </header>
+
+      <main>
+        <div class="dashboard-stats">
+          <div class="stat-card">
+            <div class="stat-number total">0</div>
+            <div class="stat-label">Total Grievances</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number pending">0</div>
+            <div class="stat-label">Pending</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number resolved">0</div>
+            <div class="stat-label">Resolved</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number rejected">0</div>
+            <div class="stat-label">Rejected</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number high-priority">0</div>
+            <div class="stat-label">High Priority</div>
+          </div>
+        </div>
+
+        <div class="dashboard-tabs">
+          <button class="tab-btn active" onclick="showTab('grievances')">
+            Manage Grievances
+          </button>
+          <button class="tab-btn" onclick="showTab('reminders')">
+            Automated Reminders
+          </button>
+        </div>
+
+        <div id="grievances-tab" class="tab-content active">
+          <h3>Manage Grievances</h3>
+
+          <div class="search-container">
+            <input
+              type="text"
+              class="search-input"
+              placeholder="Search by ID, name, or subject"
+            />
+            <button class="search-btn">Search</button>
+          </div>
+
+          <div class="filter-container">
+            <select class="filter-select" id="status-filter">
+              <option value="">All Statuses</option>
+              <option value="pending">Pending</option>
+              <option value="in_progress">In Progress</option>
+              <option value="resolved">Resolved</option>
+              <option value="rejected">Rejected</option>
+            </select>
+
+            <select class="filter-select" id="priority-filter">
+              <option value="">All Priorities</option>
+              <option value="High">High Priority</option>
+              <option value="Medium">Medium Priority</option>
+              <option value="Low">Low Priority</option>
+            </select>
+
+            <select class="filter-select" id="district-filter">
+              <option value="">All Districts</option>
+              <option value="Chennai">Chennai</option>
+              <option value="Coimbatore">Coimbatore</option>
+              <option value="Madurai">Madurai</option>
+              <option value="Salem">Salem</option>
+            </select>
+
+            <select class="filter-select">
+              <option value="">Date: All Time</option>
+              <option value="today">Today</option>
+              <option value="week">This Week</option>
+              <option value="month">This Month</option>
+            </select>
+          </div>
+
+          <table class="grievance-table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Subject</th>
+                <th>Citizen Name</th>
+                <th>District</th>
+                <th>Date</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="petitions-table-body">
+              <tr>
+                <td colspan="8" style="text-align: center; padding: 20px">
+                  Loading petitions...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="reminders-tab" class="tab-content">
+          <h3>Automated Reminders</h3>
+
+          <div class="reminder-stats">
+            <div class="stat-card">
+              <div class="stat-number total-reminders">0</div>
+              <div class="stat-label">Total Reminders</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number recent-reminders">0</div>
+              <div class="stat-label">Last 7 Days</div>
+            </div>
+          </div>
+
+          <div class="action-bar">
+            <button
+              class="action-btn primary-btn"
+              onclick="triggerManualReminders()"
+            >
+              Send Reminders Now
+            </button>
+          </div>
+
+          <table class="grievance-table">
+            <thead>
+              <tr>
+                <th>Grievance ID</th>
+                <th>Subject</th>
+                <th>Department</th>
+                <th>Days Pending</th>
+                <th>Last Reminded</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="reminders-table-body">
+              <tr>
+                <td colspan="6" style="text-align: center; padding: 20px">
+                  Loading reminders...
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+
+      <!-- Status Update Modal -->
+      <div id="update-modal" class="modal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3>Update Grievance Status</h3>
+            <span class="close" onclick="closeUpdateModal()">&times;</span>
+          </div>
+          <div class="modal-body">
+            <div class="grievance-info">
+              <div><strong>ID:</strong> <span id="grievance-id"></span></div>
+              <div>
+                <strong>Subject:</strong> <span id="grievance-subject"></span>
+              </div>
+            </div>
+
+            <form id="update-form" onsubmit="submitStatusUpdate(event)">
+              <div class="form-group">
+                <label for="update-status">Status:</label>
+                <select id="update-status" required>
+                  <option value="pending">Pending</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="resolved">Resolved</option>
+                  <option value="rejected">Rejected</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="update-comment">Comment (Optional):</label>
+                <textarea
+                  id="update-comment"
+                  rows="3"
+                  placeholder="Add details about this status update"
+                ></textarea>
+              </div>
+
+              <div class="form-actions">
+                <button
+                  type="button"
+                  class="cancel-btn"
+                  onclick="closeUpdateModal()"
+                >
+                  Cancel
+                </button>
+                <button type="submit" class="submit-btn">Update Status</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <footer class="footer">
+        <div class="container">
+          <p>
+            &copy; 2025 AI POWERED GRIEVANCE PROCESSING PORTAL. All rights
+            reserved.
+          </p>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

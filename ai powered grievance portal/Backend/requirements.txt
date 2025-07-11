@@ -1,0 +1,39 @@
+# Core FastAPI dependencies
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+
+# Form handling and file uploads
+python-multipart==0.0.6
+
+# Authentication and security
+bcrypt==4.1.2
+
+# Database dependencies
+pymongo==4.6.0
+mysql-connector-python==8.2.0
+
+# Environment and configuration
+python-dotenv==1.0.0
+
+# HTTP requests and API calls
+requests==2.31.0
+
+# Background task scheduling (for automated reminders)
+APScheduler==3.10.4
+
+# Timezone handling
+pytz==2023.3
+
+# Machine learning for similarity detection
+scikit-learn==1.3.2
+numpy==1.24.4
+
+# Built-in Python modules (no installation needed)
+# - datetime
+# - timedelta 
+# - difflib
+# - os
+# - random
+# - string
+# - logging

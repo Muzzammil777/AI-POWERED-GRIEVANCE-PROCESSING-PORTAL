@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html id="portal_html" lang="en">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+    <meta
+      http-equiv="Cache-Control"
+      content="no-cache, no-store, must-revalidate"
+    />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <title>Portal Access - AI POWERED GRIEVANCE PROCESSING PORTAL</title>
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link
+      id="customStyleSheet"
+      href="css/stylesheet.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <style>
+      /* Login page with green theme matching the portal style */
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow-x: hidden;
+        background: linear-gradient(
+          135deg,
+          #e8f5e8 0%,
+          #d4edda 25%,
+          #c3e6cb 50%,
+          #b1dfbb 75%,
+          #a3d9a5 100%
+        );
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+        min-height: 100vh;
+      }
+
+      body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.03) 0%,
+          rgba(46, 204, 113, 0.02) 30%,
+          transparent 60%
+        );
+        animation: subtleGlow 15s ease-in-out infinite;
+        pointer-events: none;
+        z-index: -10;
+      }
+
+      @keyframes gradientShift {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @keyframes subtleGlow {
+        0%,
+        100% {
+          transform: translate(-50%, -50%);
+          opacity: 0.5;
+        }
+        50% {
+          transform: translate(-50%, -50%);
+          opacity: 0.8;
+        }
+      }
+
+      .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        position: relative;
+      }
+
+      .auth-wrapper {
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.98),
+          rgba(248, 250, 252, 0.95)
+        );
+        padding: 40px;
+        border-radius: 25px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9),
+          0 0 50px rgba(39, 174, 96, 0.1);
+        width: 100%;
+        max-width: 450px;
+        border: 2px solid rgba(39, 174, 96, 0.1);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        animation: fadeInUp 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.3s
+          both;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .auth-wrapper::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 200px;
+        background: radial-gradient(
+          circle,
+          rgba(39, 174, 96, 0.4) 0%,
+          rgba(46, 204, 113, 0.3) 30%,
+          rgba(22, 160, 133, 0.2) 60%,
+          transparent 80%
+        );
+        border-radius: 50%;
+        z-index: -1;
+        animation: dynamicGlow 4s ease-in-out infinite;
+      }
+
+      @keyframes fadeInUp {
+        0% {
+          opacity: 0;
+          transform: translateY(50px) scale(0.9);
+        }
+        60% {
+          opacity: 0.8;
+          transform: translateY(-10px) scale(1.05);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      @keyframes dynamicGlow {
+        0%,
+        100% {
+          transform: translateX(-50%) scale(1) rotate(0deg);
+          opacity: 0.6;
+        }
+        25% {
+          transform: translateX(-50%) scale(1.2) rotate(90deg);
+          opacity: 0.8;
+        }
+        50% {
+          transform: translateX(-50%) scale(1.4) rotate(180deg);
+          opacity: 1;
+        }
+        75% {
+          transform: translateX(-50%) scale(1.2) rotate(270deg);
+          opacity: 0.8;
+        }
+      }
+
+      .auth-wrapper:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2),
+          inset 0 1px 0 rgba(255, 255, 255, 0.9),
+          0 0 80px rgba(39, 174, 96, 0.2);
+      }
+
+      h2 {
+        text-align: center;
+        color: #27ae60;
+        margin-bottom: 12px;
+        font-size: 1.8rem;
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        background: linear-gradient(
+          135deg,
+          #27ae60 0%,
+          #16a085 50%,
+          #27ae60 100%
+        );
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: simpleShimmer 4s ease-in-out infinite;
+      }
+
+      @keyframes simpleShimmer {
+        0%,
+        100% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 1;
+        }
+      }
+
+      .subtitle {
+        text-align: center;
+        color: #666;
+        margin-bottom: 30px;
+        font-size: 1rem;
+        font-weight: 500;
+      }
+
+      input {
+        width: 100%;
+        padding: 15px;
+        margin: 12px 0;
+        border-radius: 12px;
+        border: 2px solid #e8f5e8;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.9);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-sizing: border-box;
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #27ae60;
+        background: rgba(255, 255, 255, 1);
+        box-shadow: 0 0 0 3px rgba(39, 174, 96, 0.1),
+          inset 0 2px 4px rgba(0, 0, 0, 0.1);
+        transform: translateY(-2px);
+      }
+
+      input::placeholder {
+        color: #999;
+        font-style: italic;
+      }
+
+      button {
+        width: 100%;
+        padding: 15px;
+        background: linear-gradient(135deg, #27ae60 0%, #16a085 100%);
+        border: none;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 12px;
+        cursor: pointer;
+        margin-top: 12px;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.675);
+        box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+      }
+
+      button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      button:hover {
+        background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(39, 174, 96, 0.4),
+          inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      }
+
+      button:hover::before {
+        left: 100%;
+      }
+
+      button:active {
+        transform: translateY(-1px);
+        transition: all 0.1s ease;
+      }
+
+      .switch-link {
+        text-align: center;
+        margin-top: 20px;
+        padding: 15px;
+        background: rgba(39, 174, 96, 0.05);
+        border-radius: 12px;
+        border: 1px solid rgba(39, 174, 96, 0.1);
+      }
+
+      .switch-link a {
+        color: #27ae60;
+        text-decoration: none;
+        cursor: pointer;
+        font-weight: 600;
+        padding: 8px 15px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        display: inline-block;
+        margin: 0 5px;
+      }
+
+      .switch-link a:hover {
+        background: rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+        text-decoration: underline;
+      }
+
+      .form-card {
+        display: none;
+        animation: slideIn 0.5s ease-out;
+      }
+
+      .form-card.active {
+        display: block;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .back-link {
+        display: block;
+        text-align: center;
+        margin-top: 20px;
+        color: #27ae60;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .back-link:hover {
+        background: rgba(39, 174, 96, 0.1);
+        transform: translateY(-2px);
+      }
+
+      /* Notification styles */
+      .notification {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease-out;
+      }
+
+      .notification.show {
+        transform: translateX(0);
+      }
+
+      .notification.success {
+        background: linear-gradient(135deg, #27ae60, #2ecc71);
+      }
+
+      .notification.error {
+        background: linear-gradient(135deg, #e74c3c, #c0392b);
+      }
+
+      .notification.info {
+        background: linear-gradient(135deg, #3498db, #2980b9);
+      }
+
+      @media (max-width: 768px) {
+        .auth-wrapper {
+          margin: 20px;
+          padding: 30px;
+          max-width: 100%;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        input,
+        button {
+          padding: 12px;
+        }
+      }
+    </style>
+
+    <!-- Local JavaScript -->
+    <script type="text/javascript" src="js/api.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </head>
+  <body class="body">
+    <div class="main-container">
+      <div class="auth-wrapper">
+        <h2 id="form-header">User Login Panel</h2>
+        <p class="subtitle">Access the AI-Powered Grievance Portal</p>
+
+        <!-- Sign In Form -->
+        <form id="form-login" class="form-card active">
+          <input
+            type="text"
+            name="user_id"
+            placeholder="Your Username"
+            required
+          />
+          <input
+            type="password"
+            name="passcode"
+            placeholder="Your Password"
+            required
+          />
+          <button type="submit">Log In</button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="form-signup" class="form-card">
+          <input
+            type="text"
+            name="full_name"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            type="text"
+            name="new_user"
+            placeholder="Create Username"
+            required
+          />
+          <input
+            type="password"
+            name="new_pass"
+            placeholder="Create Password"
+            required
+          />
+          <button type="submit">Register</button>
+        </form>
+
+        <div class="switch-link">
+          <a onclick="toggleForms('form-login', 'User Login Panel')">Login</a> |
+          <a onclick="toggleForms('form-signup', 'User Signup Panel')"
+            >Sign Up</a
+          >
+        </div>
+
+        <a href="index.html" class="back-link">← Back to Home</a>
+      </div>
+    </div>
+
+    <script>
+      const apiURL = "http://127.0.0.1:8000";
+
+      // Show notification function
+      function showNotification(message, type = "info") {
+        // Remove existing notifications
+        const existing = document.querySelector(".notification");
+        if (existing) {
+          existing.remove();
+        }
+
+        // Create new notification
+        const notification = document.createElement("div");
+        notification.className = `notification ${type}`;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+
+        // Show notification
+        setTimeout(() => notification.classList.add("show"), 100);
+
+        // Hide notification after 3 seconds
+        setTimeout(() => {
+          notification.classList.remove("show");
+          setTimeout(() => notification.remove(), 300);
+        }, 3000);
+      }
+
+      // Toggle between login and signup forms
+      function toggleForms(formId, title) {
+        document
+          .querySelectorAll(".form-card")
+          .forEach((f) => f.classList.remove("active"));
+        document.getElementById(formId).classList.add("active");
+        document.getElementById("form-header").textContent = title;
+
+        // Update URL parameter without refreshing the page
+        const urlParams = new URLSearchParams(window.location.search);
+        if (formId === "form-signup") {
+          urlParams.set("form", "signup");
+        } else {
+          urlParams.delete("form");
+        }
+
+        // Preserve redirect parameter if it exists
+        const redirectTo = urlParams.get("redirect");
+
+        // Update URL without refreshing the page
+        const newUrl =
+          window.location.pathname +
+          (urlParams.toString() ? "?" + urlParams.toString() : "");
+        window.history.replaceState({}, "", newUrl);
+      }
+
+      // Handle user registration
+      document
+        .getElementById("form-signup")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          try {
+            const data = new FormData(e.target);
+
+            showNotification("Creating your account...", "info");
+
+            const res = await fetch(`${apiURL}/register`, {
+              method: "POST",
+              body: data,
+            });
+
+            const output = await res.json();
+
+            if (res.ok && output.message) {
+              showNotification(output.message, "success");
+              toggleForms("form-login", "User Login Panel");
+              // Clear the signup form
+              e.target.reset();
+            } else {
+              showNotification(output.error || "Registration failed", "error");
+            }
+          } catch (error) {
+            console.error("Registration error:", error);
+            showNotification("Network error. Please try again.", "error");
+          }
+        });
+
+      // Handle user login
+      document
+        .getElementById("form-login")
+        .addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          try {
+            const data = new FormData(e.target);
+
+            showNotification("Logging you in...", "info");
+
+            const res = await fetch(`${apiURL}/login`, {
+              method: "POST",
+              body: data,
+            });
+
+            const output = await res.json();
+
+            if (res.ok && output.role === "user") {
+              // Store user information
+              sessionStorage.setItem(
+                "user",
+                JSON.stringify({
+                  username: data.get("user_id"),
+                  role: output.role,
+                })
+              );
+
+              showNotification(
+                output.message || "Login successful!",
+                "success"
+              );
+
+              // Redirect to intended page or file grievance page after successful login
+              const urlParams = new URLSearchParams(window.location.search);
+              const redirectTo =
+                urlParams.get("redirect") || "file_grievance.html";
+
+              setTimeout(() => {
+                window.location.href = redirectTo;
+              }, 1500);
+            } else if (res.ok && output.role === "admin") {
+              // Store admin information
+              sessionStorage.setItem(
+                "user",
+                JSON.stringify({
+                  username: data.get("user_id"),
+                  role: output.role,
+                  department: output.department,
+                })
+              );
+
+              showNotification(
+                output.message || "Admin login successful!",
+                "success"
+              );
+
+              setTimeout(() => {
+                window.location.href =
+                  output.dashboard || "officer_dashboard.html";
+              }, 1500);
+            } else {
+              showNotification(output.error || "Login failed", "error");
+            }
+          } catch (error) {
+            console.error("Login error:", error);
+            showNotification("Network error. Please try again.", "error");
+          }
+        });
+
+      // Add input focus effects
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check URL parameters to determine which form to show
+        const urlParams = new URLSearchParams(window.location.search);
+        const formType = urlParams.get("form");
+
+        if (formType === "signup") {
+          toggleForms("form-signup", "User Signup Panel");
+        }
+
+        const inputs = document.querySelectorAll("input");
+        inputs.forEach((input) => {
+          input.addEventListener("focus", function () {
+            this.parentElement.style.transform = "scale(1.02)";
+          });
+
+          input.addEventListener("blur", function () {
+            this.parentElement.style.transform = "scale(1)";
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
